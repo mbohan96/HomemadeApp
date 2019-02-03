@@ -1,16 +1,26 @@
+// *********************************************************************************
+// api-routes.js - this file offers a set of routes for displaying and saving data to the db
+// *********************************************************************************
 
+// Dependencies
+// =============================================================
+
+// Requiring our Todo model
 var db = require("../models");
 
+// Routes
+// =============================================================
 module.exports = function(app) {
 
-  app.get("/api/recipes", function(req, res) {
+  // GET route for getting all of the recipes
+  app.get("/api/recipes/", function(req, res) {
     db.Post.findAll({})
       .then(function(dbPost) {
         res.json(dbPost);
       });
   });
 
-  
+  // Get route for returning recipes of a specific category
   app.get("/api/recipes/category/:category", function(req, res) {
     db.Post.findAll({
       where: {
@@ -22,7 +32,7 @@ module.exports = function(app) {
       });
   });
 
- 
+  // Get route for retrieving a single post
   app.get("/api/recipes/:id", function(req, res) {
     db.Post.findOne({
       where: {
@@ -47,7 +57,7 @@ module.exports = function(app) {
       });
   });
 
-  
+  // DELETE route for deleting recipes
   app.delete("/api/recipes/:id", function(req, res) {
     db.Post.destroy({
       where: {
@@ -59,7 +69,7 @@ module.exports = function(app) {
       });
   });
 
-  
+  // PUT route for updating recipes
   app.put("/api/recipes", function(req, res) {
     db.Post.update(req.body,
       {
