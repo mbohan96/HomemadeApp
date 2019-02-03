@@ -8,7 +8,7 @@ module.exports = function(app) {
     if (req.user) {
       res.redirect("/recipes");
     }
-    res.sendFile(path.join(__dirname, "../public/join.html"));
+    res.sendFile(path.join(__dirname, "../public/Join.html"));
   });
 
   app.get("/login", function(req, res) {
